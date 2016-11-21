@@ -1,0 +1,40 @@
+    <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr class="active">
+              <th>ID</th>
+              <th>Usuario</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              foreach ($usuarios as $user) {
+                $linkedit = base_url("/Usuario/?id={$user->id}");
+                $linkdel = base_url("/Usuario/delete/?id={$user->id}");
+
+                echo "
+                  <tr class='active'>
+                    <td>$user->id</td>
+                    <td>$user->usuario</td>
+                    <td>$user->nombre</td>
+                    <td>$user->correo</td>
+                    <td>
+                    <a href='{$linkedit}' role='button' class='btn btn-warning'>Modificar</a>
+                    <a href='{$linkdel}' role='button' onclick='return validarBorrar();'class='btn btn-danger'>Eliminar</a>
+                    </td>
+                  </tr>
+                ";
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function validarBorrar(){
+        return confirm("¿Seguro que deseas borrar esta fila?, esta operacion no se puede cancelar");
+      }
+    </script>
